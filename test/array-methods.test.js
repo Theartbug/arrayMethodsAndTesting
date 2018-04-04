@@ -52,6 +52,16 @@ describe('Array methods', () => {
     assert.equal(reduced, 10);
   });
 
+  it('starts at given index with reduce', () => {
+    const reduced = arrExports.reduce(array, (accumulator, item) => accumulator + item, null, 2);
+    assert.equal(reduced, 12);
+  });
+
+  it('skips the hole if starting at that index', () => {
+    const reduced = arrExports.reduce(arr, (accumulator, item) => accumulator + item, null, 2);
+    assert.equal(reduced, 7);
+  });
+
   it('returns true for every', () => {
     const every = arrExports.every(array, (x) => x < 10);
     assert.equal(every, true);
@@ -78,4 +88,5 @@ describe('Array methods', () => {
     arrExports.forEach(arr, (x) => mutated.push(x));
     assert.deepEqual(mutated, [1, 2, 3, 4]);
   });
+
 });
