@@ -17,6 +17,11 @@ describe('Array methods', () => {
     assert.equal(holes.length, arr.length);
   });
 
+  it('starts at given index for map', () => {
+    const mapped = arrExports.map(array, (x) => x + 1, 2);
+    assert.deepEqual(mapped, [4, 5, 6]);
+  });
+
   it('filters an array', () => {
     const evens = arrExports.filter(array, (x) => x % 2 === 0);
     assert.deepEqual(evens, [2, 4]);
@@ -27,6 +32,11 @@ describe('Array methods', () => {
     assert.deepEqual(holes, [2, 4]);
   });
 
+  it('starts at given index for filter', () => {
+    const evens = arrExports.filter(array, (x) => x % 2 === 0, 2);
+    assert.deepEqual(evens, [4]);
+  });
+
   it('returns an index of an item in an array', () => {
     const index = arrExports.indexOf(array, (x) => x % 2 === 0);
     assert.equal(index, 1);
@@ -35,6 +45,11 @@ describe('Array methods', () => {
   it('returns -1 if nothing passes in the array', () => {
     const index = arrExports.indexOf(array, (x) => x === 8);
     assert.equal(index, -1);
+  });
+
+  it('starts at given index for indexOf', () => {
+    const index = arrExports.indexOf(array, (x) => x % 2 === 0, 2);
+    assert.equal(index, 3);
   });
 
   it('returns a reduced array', () => {
@@ -57,7 +72,7 @@ describe('Array methods', () => {
     assert.equal(reduced, 12);
   });
 
-  it('skips the hole if starting at that index', () => {
+  it('skips the hole if starting at that index with reduce', () => {
     const reduced = arrExports.reduce(arr, (accumulator, item) => accumulator + item, null, 2);
     assert.equal(reduced, 7);
   });
@@ -70,6 +85,11 @@ describe('Array methods', () => {
   it('returns false for every', () => {
     const every = arrExports.every(array, (x) => x < 2);
     assert.equal(every, false);
+  });
+
+  it('starts at given index with every', () => {
+    const every = arrExports.every(array, (x) => x > 4, 5);
+    assert.equal(every, true);
   });
 
   it('skips holes in every', () => {
@@ -87,6 +107,12 @@ describe('Array methods', () => {
     const mutated = [];
     arrExports.forEach(arr, (x) => mutated.push(x));
     assert.deepEqual(mutated, [1, 2, 3, 4]);
+  });
+
+  it('starts at given index forEach', () => {
+    const mutated = [];
+    arrExports.forEach(array, (x) => mutated.push(x), 2);
+    assert.deepEqual(mutated, [3, 4, 5]);
   });
 
 });
