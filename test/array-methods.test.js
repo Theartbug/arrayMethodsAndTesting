@@ -66,4 +66,16 @@ describe('Array methods', () => {
     const every = arrExports.every(arr, (x) => x < 10);
     assert.equal(every, true);
   });
+
+  it('mutates array forEach', () => {
+    const mutated = [];
+    arrExports.forEach(array, (x) => mutated.push(x));
+    assert.deepEqual(array, mutated);
+  });
+
+  it('skips holes forEach', () => {
+    const mutated = [];
+    arrExports.forEach(arr, (x) => mutated.push(x));
+    assert.deepEqual(mutated, [1, 2, 3, 4]);
+  });
 });
